@@ -39,8 +39,11 @@ const Sample = ()=>{
               }
               let body = JSON.stringify(userProduct)
               let res = await axios.post('http://localhost:5000/api/profile/',body,config)
-              console.log(res.data)
-            }catch(err){console.log(err.response.data)}
+              window.confirm("All data registered successfully")
+            //  console.log(res.data)
+            }catch(err){console.log(err.response.data)
+              window.confirm("Can not registered")
+            }
             }
         }
     return(

@@ -18,6 +18,7 @@ const Register = ()=>{
           e.preventDefault();
             if(password !== password2){
                 console.log('passwords are not match')
+                window.confirm("Passwords must be same")
             }else{
             let userNew = {
               name,firma,date,email,password,password2,faxNumber
@@ -28,10 +29,13 @@ const Register = ()=>{
               }
               let body = JSON.stringify(userNew)
               let res = await axios.post('http://localhost:5000/api/users',body,config)
+              window.confirm("All data registered successfully")
               // const { token } = res.data;
               // localStorage.setItem('token', token);
               // console.log(localStorage.token)
-            }catch(err){console.log(err.response.data)}
+            }catch(err){
+              window.confirm("Your information is not correct")
+              console.log(err.response.data)}
             }
         }
     return(

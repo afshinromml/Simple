@@ -41,10 +41,12 @@ const Login = ()=>{
               //  const { token } = res.data;
               //  let token = res.data
                localStorage.setItem('token', res.data.token);
-
+               window.confirm("You log in successfully")
               isRegistered = true
        
-            }catch(err){console.log(err.response.data)}
+            }catch(err){
+              window.confirm("Your information is not correct")
+              console.log(err.response.data)}
             }
         }
     return(

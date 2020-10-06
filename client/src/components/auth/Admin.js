@@ -46,6 +46,7 @@ const Admin = ()=>{
                         let body = JSON.stringify(admin)
                         let res = await axios.post('http://localhost:5000/api/admin',body,config)
                         console.log(res.data.token)
+                        window.confirm("Admin registered successfully")
                       //  const { token } = res.data;
                       //  let token = res.data
                        localStorage.setItem('token', res.data.token);
@@ -54,10 +55,11 @@ const Admin = ()=>{
                       isRegistered = true
                       }catch(err){
                       //  Popup.alert('I am alert, nice to meet you');
+                      window.confirm("Your user name or password is wrong")
                           isRegistered = false
                         localStorage.removeItem("token")  
                         console.log(err.response.data)}
-                        window.confirm("Your user name or password is wrong")
+                            
             }
         }
     return(
