@@ -26,6 +26,8 @@ app.use('/api/users/',require('./modules/routes/api/users'))
 app.use('/api/posts/',require('./modules/routes/api/posts'))
 app.use('/api/auth/',require('./modules/routes/api/auth'))
 app.use('/api/admin/',require('./modules/routes/api/admin'))
+app.use('/api/sendMail/',require('./modules/routes/api/sendMail'))
+app.use('/api/sending/',require('./modules/routes/api/sending'))
 app.use('/api/profile/',require('./modules/routes/api/profile'))
 const PORT = 5000;
 app.listen(5000, () => {

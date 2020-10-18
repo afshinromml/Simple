@@ -31,6 +31,25 @@ let SampleSearch = ()=> {
     localStorage.token = "";
     console.log(localStorage.token);
   };
+
+  let sendMail = async () => {
+ 
+    const config ={
+      headers:{
+        'Content-Type':'application/json',
+        'x-auth-token' : localStorage.token
+    } 
+    }
+    await axios.post('http://localhost:5000/api/sendMail',config)
+
+    //console.log(res.data.token)
+    //  const { token } = res.data;
+    //  let token = res.data
+     //localStorage.setItem('token', res.data.token);
+     window.confirm("Your certificate sent")
+ 
+  };
+
   let onSubmit = async (e) => {
 
     assignData({ ...getData,
@@ -119,6 +138,9 @@ let url = "http://localhost:5000/api/profile/me/"
       <input type="submit" className="btn btn-primary" value="Search" />
       <button type="button" className="btn btn-primary" onClick={logout}>
         Log out
+      </button>
+      <button type="button" className="btn btn-primary" onClick={sendMail}>
+        Send Mail
       </button>
     </form>
 

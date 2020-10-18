@@ -55,7 +55,7 @@ const Admin = ()=>{
                       isRegistered = true
                       }catch(err){
                       //  Popup.alert('I am alert, nice to meet you');
-                      window.confirm("Your user name or password is wrong")
+                        window.confirm("Your user name or password is wrong")
                           isRegistered = false
                         localStorage.removeItem("token")  
                         console.log(err.response.data)}

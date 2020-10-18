@@ -112,7 +112,6 @@ const Sample = ()=>{
         onClick={logout}
         >Log out</button>
       </form>
-  
         </Fragment>
     )
 }

@@ -1,17 +1,36 @@
 import React,{Fragment,useState} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import setAuthToken from './SetHeaderUserToken'
+import SampleSearch from '../product/SampleSearch'
 // import Register from './Register'
-const Login = ()=>{
+const Login =  ()=>{
 
     let [getData,assignData]=useState({
         firma:'',
         email:'',
         password:'',
-        token:''
+        token:'',
+      //  isRegister:false
         })
-        let {firma,email,password}= getData;
         let isRegistered = false;
+
+let authLogin = async ()=>{
+              let res = await axios.get('http://localhost:5000/api/auth')
+            console.log(res.data.message)
+}
+
+        if(localStorage.token){
+          isRegistered = true
+          setAuthToken(localStorage.token)
+          authLogin()
+        }
+        else{
+          isRegistered = false
+        }
+
+        let {firma,email,password}= getData;
+    
         let onChange = e=>assignData({...getData,[e.target.name]:e.target.value})
         let activate =()=>{
           if (isRegistered === true){
@@ -50,41 +69,47 @@ const Login = ()=>{
             }
         }
     return(
+      <div>
+      {isRegistered ? (
+ <SampleSearch />
+      ) : (
         <Fragment>
-      <h1 className="large text-primary">Sign In</h1>
-      <form className="form" onSubmit={e=>(onSubmit(e))}>
-  
-        <div className="form-group">
-          <input type="text" placeholder="Firma" name="firma" value={firma} 
-          onChange ={e=>(onChange(e))}
-          required />
-        </div>
-
-        <div className="form-group">
-          <input type="email" placeholder="Email Address" value={email} name="email" 
-             onChange ={e=>(onChange(e))}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            minLength="8"
-            value={password} 
+        <h1 className="large text-primary">Sign In</h1>
+        <form className="form" onSubmit={e=>(onSubmit(e))}>
+    
+          <div className="form-group">
+            <input type="text" placeholder="Firma" name="firma" value={firma} 
             onChange ={e=>(onChange(e))}
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Sign in" />
-
-        <button onClick={activate}>
-        go to product search</button>
-      </form>
-      
-      <p className="my-1">
-       Not register? <Link to='/Register'>Register</Link>
-      </p>
-        </Fragment>
+            required />
+          </div>
+  
+          <div className="form-group">
+            <input type="email" placeholder="Email Address" value={email} name="email" 
+               onChange ={e=>(onChange(e))}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              minLength="8"
+              value={password} 
+              onChange ={e=>(onChange(e))}
+            />
+          </div>
+          <input type="submit" className="btn btn-primary" value="Sign in" />
+  
+          <button onClick={activate}>
+          go to product search</button>
+        </form>
+        <p className="my-1">
+         Not register? <Link to='/Register'>Register</Link>
+        </p>
+          </Fragment>
+      )
+      }
+    </div>
     )
 }
 export default Login
